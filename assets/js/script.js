@@ -1,30 +1,25 @@
 // Assignment Code
 
-
 let generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  userInput()
   var password = userInput();
 
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
 // Password options
-let capitalLetters = ("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-let lowerCaseLetters = ("abcdefghijklmnopqrstuvwxyz");
-let specialCharacters = ("!@#$%^&*()_-=+[{}];'./")
-let numericCharacters = ("1,2,3,4,5,6,7,8,9")
-// Password Array
-let passwordArray = []
-let passwordCharacters = []
+let capitalLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz";
+let specialCharacters = "!@#$%^&*()_-=+[{}];'./";
+let numericCharacters = "1,2,3,4,5,6,7,8,9";
+
 //User Input Choices
 let userChoiceLength = 0;
 let userChoiceCaps = false;
@@ -32,62 +27,64 @@ let userChoiceLower = false;
 let userChoiceNumeric = false;
 let userChoiceSpecial = false;
 
-
+// Function that gathers user data
 function userInput() {
   //ask for length of password
-  passwordCharacters = []
-  userChoiceLength = prompt("How many characters (min-8 max-128)?")
+  let passwordCharacters = [];
+  userChoiceLength = prompt("How many characters (min-8 max-128)?");
   if (isNaN(userChoiceLength)) {
     alert("Invalid Choice");
     return userInput();
-  }
-  else if (userChoiceLength < 8 || userChoiceLength > 128) {
+  } else if (userChoiceLength < 8 || userChoiceLength > 128) {
     alert("Invalid Choice");
     return userInput();
   }
-  //else if (userChoiceLength == false){
-  //  return;
 
-
-  //ask if the user wants capital letters  
-  userChoiceCaps = confirm("Want Capital Letters?")
+  //ask if the user wants capital letters
+  userChoiceCaps = confirm("Want Capital Letters?");
   if (userChoiceCaps == true) {
-    (passwordArray = capitalLetters.concat(passwordCharacters));
+    passwordCharacters = passwordCharacters.concat(capitalLetters);
   }
-  else if (userChoiceCaps == false);
-
 
   //ask user if they want lower case letters
-  userChoiceLower = confirm("Want Lower Case Letters?")
+  userChoiceLower = confirm("Want Lower Case Letters?");
   if (userChoiceLower == true) {
-    (passwordArray = lowerCaseLetters.concat(passwordCharacters));
+    passwordCharacters = passwordCharacters.concat(lowerCaseLetters);
   }
-  else if (userChoiceLower == false);
-
 
   //ask if user wants numeric characters
-  userChoiceNumeric = confirm("Want Numeric Characters?")
+  userChoiceNumeric = confirm("Want Numeric Characters?");
   if (userChoiceNumeric == true) {
-    (passwordArray = numericCharacters.concat(passwordCharacters));
+    passwordCharacters = passwordCharacters.concat(numericCharacters);
   }
-  else if (userChoiceNumeric == false);
-
-
-
 
   //ask if user wants special characters
-  userChoiceSpecial = confirm("Want Special Characters?")
+  userChoiceSpecial = confirm("Want Special Characters?");
   if (userChoiceSpecial == true) {
-    (passwordArray = specialCharacters.concat(passwordCharacters));
+    passwordCharacters = passwordCharacters.concat(specialCharacters);
   }
-  else if (userChoiceSpecial == false);
 
   //If nothing has been selected for criteria
-  if (userChoiceCaps == false && userChoiceLower == false && userChoiceNumeric == false && userChoiceSpecial == false) {
+  if (
+    userChoiceCaps == false &&
+    userChoiceLower == false &&
+    userChoiceNumeric == false &&
+    userChoiceSpecial == false
+  ) {
     alert("Invalid password, no criteria selected.");
     return userInput();
-
   }
-}
+  //Changes the array to a string
+  passwordCharacters = passwordCharacters.join("");
+  console.log(passwordCharacters);
 
-function
+  //Creates the random password
+  let result = "";
+  for (i = 0; i < userChoiceLength; i++) {
+    result += passwordCharacters.charAt(
+      Math.floor(Math.random() * passwordCharacters.length)
+    );
+  }
+  //Returns resulting password to the webpage
+  return result;
+}
