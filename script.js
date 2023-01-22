@@ -31,11 +31,11 @@ let userChoiceSpecial = false;
 function userInput() {
   //ask for length of password
   let passwordCharacters = [];
-  userChoiceLength = prompt("How many characters (min-8 max-128)?");
+  userChoiceLength = prompt("How many characters (min-8 max-10000)?");
   if (isNaN(userChoiceLength)) {
     alert("Invalid Choice");
     return userInput();
-  } else if (userChoiceLength < 8 || userChoiceLength > 128) {
+  } else if (userChoiceLength < 8 || userChoiceLength > 10000) {
     alert("Invalid Choice");
     return userInput();
   }
