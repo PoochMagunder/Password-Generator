@@ -35,7 +35,7 @@ function userInput() {
   if (isNaN(userChoiceLength)) {
     alert("Invalid Choice");
     return userInput();
-  } else if (userChoiceLength < 8 || userChoiceLength > 10000) {
+  } else if (userChoiceLength < 8 || userChoiceLength > 140) {
     alert("Invalid Choice");
     return userInput();
   }
